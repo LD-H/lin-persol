@@ -6,6 +6,8 @@ COPY package*.json ./
 COPY prisma ./prisma/
 COPY prisma.config.ts ./
 
+ENV DATABASE_URL="mysql://prisma:prisma@localhost:3306/prisma"
+
 RUN npm ci
 
 COPY . .
