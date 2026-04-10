@@ -77,7 +77,7 @@ router.post('/upload', upload.single('file'), async (req: Request, res: Response
  * 删除图片：从 OSS 删除文件，并从 MySQL 删除记录
  */
 router.delete('/:id', async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
+  const id = parseInt(req.params.id as string)
 
   if (isNaN(id)) {
     res.status(400).json({ error: '无效的 ID' })
