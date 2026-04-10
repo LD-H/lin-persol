@@ -8,7 +8,7 @@ COPY prisma.config.ts ./
 
 ENV DATABASE_URL="mysql://prisma:prisma@localhost:3306/prisma"
 
-RUN npm ci
+RUN npm ci --include=dev
 
 COPY . .
 
