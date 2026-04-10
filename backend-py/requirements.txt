@@ -1,0 +1,10 @@
+fastapi==0.115.0          # Web 框架，对应 Express
+uvicorn[standard]==0.30.6 # ASGI 服务器，对应 Node.js 运行时
+sqlalchemy==2.0.35        # ORM，对应 Prisma
+pymysql==1.1.1            # MySQL 驱动，对应 mysql2
+alembic==1.13.3           # 数据库迁移工具，对应 prisma migrate
+python-multipart==0.0.9   # 处理文件上传（multipart/form-data），对应 multer
+python-dotenv==1.0.1      # 读取 .env 文件，对应 dotenv
+oss2==2.18.5              # 阿里云 OSS SDK，对应 ali-oss
+pydantic==2.9.2           # 数据校验，FastAPI 内置使用
+pydantic-settings==2.5.2  # 从环境变量加载配置

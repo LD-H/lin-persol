@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Photo {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  ossKey    String   @unique @db.VarChar(512)  // OSS 中的文件路径
+  url       String   @db.VarChar(1024)         // 完整访问 URL
+  size      Int                                 // 文件大小（字节）
+  mimeType  String   @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("photos")
+}

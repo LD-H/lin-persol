@@ -1,0 +1,60 @@
+name: Frontend CI
+
+# 触发条件：push 或 PR 到 main 分支时运行
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'       # 只有 frontend 目录有变动时才触发
+      - '.github/workflows/frontend-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+
+jobs:
+  build:
+    name: 类型检查 & 打包构建
+    runs-on: ubuntu-latest   # 在 GitHub 提供的 Ubuntu 服务器上运行
+
+    steps:
+      # 1. 拉取代码
+      - name: 📦 Checkout 代码
+        uses: actions/checkout@v4
+
+      # 2. 安装 Node.js（版本与本地保持一致）
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'               # 缓存 node_modules，加快后续构建
+          cache-dependency-path: frontend/package-lock.json
+
+      # 3. 安装依赖
+      - name: 📥 安装依赖
+        working-directory: frontend
+        run: npm ci                  # ci 比 install 更严格，保证依赖版本一致
+
+      # 4. TypeScript 类型检查
+      - name: 🔍 TypeScript 类型检查
+        working-directory: frontend
+        run: npx tsc -b --noEmit
+
+      # 5. ESLint 代码规范检查
+      - name: 🧹 ESLint 检查
+        working-directory: frontend
+        run: npm run lint
+
+      # 6. 打包构建
+      - name: 🏗️ 打包构建
+        working-directory: frontend
+        run: npm run build
+
+      # 7. 上传构建产物（可供后续 CD 步骤使用，保留 7 天）
+      - name: 📤 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 7
