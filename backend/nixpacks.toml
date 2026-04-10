@@ -7,5 +7,7 @@ cmds = ["npm install"]
 [phases.build]
 cmds = ["npm run build"]
 
-[start]
+[start]git add .
+git commit -m "fix: add nixpacks config for Railway deployment"
+git push
 cmd = "npm run start"
