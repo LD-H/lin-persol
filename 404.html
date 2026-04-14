@@ -17,7 +17,7 @@
           var rest = params.toString();
           window.history.replaceState(
             null, null,
-            window.location.pathname + p +
+            window.location.pathname.replace(/\/$/, '') + p +
             (q ? '?' + q : '') +
             (rest ? (q ? '&' : '?') + rest : '') +
             window.location.hash
