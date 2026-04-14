@@ -6,7 +6,6 @@ import { useAuth } from '../contexts/AuthContext'
 const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || '' })
 
 export default function Login() {
-  const [mode, setMode] = useState<'login' | 'register'>('login')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -20,7 +19,7 @@ export default function Login() {
     setLoading(true)
     setError('')
     try {
-      const { data } = await api.post(`/api/auth/${mode}`, { username, password })
+      const { data } = await api.post('/api/auth/login', { username, password })
       login(data.token, data.username)
       navigate('/gallery')
     } catch (err: any) {
@@ -52,12 +51,8 @@ export default function Login() {
           {/* 标题 */}
           <div className="mb-8 text-center">
             <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mb-2">Gallery</p>
-            <h1 className="text-2xl font-bold text-white">
-              {mode === 'login' ? '登录' : '注册'}
-            </h1>
-            <p className="text-sm text-gray-500 mt-1">
-              {mode === 'login' ? '登录后访问相册' : '创建新账号'}
-            </p>
+            <h1 className="text-2xl font-bold text-white">登录</h1>
+            <p className="text-sm text-gray-500 mt-1">登录后访问相册</p>
           </div>
 
           {/* 表单 */}
@@ -94,20 +89,9 @@ export default function Login() {
               disabled={loading}
               className="w-full py-2.5 bg-white text-black rounded-lg text-sm font-semibold hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 mt-2"
             >
-              {loading ? '请稍候...' : mode === 'login' ? '登录' : '注册'}
+              {loading ? '请稍候...' : '登录'}
             </button>
           </form>
-
-          {/* 切换模式 */}
-          <p className="text-center text-xs text-gray-600 mt-6">
-            {mode === 'login' ? '还没有账号？' : '已有账号？'}
-            <button
-              onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError('') }}
-              className="text-purple-400 hover:text-purple-300 ml-1 transition-colors"
-            >
-              {mode === 'login' ? '注册' : '登录'}
-            </button>
-          </p>
 
         </div>
       </div>
