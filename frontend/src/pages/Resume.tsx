@@ -20,7 +20,7 @@ export default function Resume() {
         <div className="mb-16">
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mb-4">Resume</p>
           <h1 className="text-4xl font-bold tracking-tight text-white mb-3">个人简历</h1>
-          <p className="text-sm text-gray-500">前端开发工程师 · 4年+ 经验</p>
+          <p className="text-sm text-gray-500">前端开发工程师/全栈工程师 · 2021起</p>
         </div>
 
         {/* 个人技能 */}
