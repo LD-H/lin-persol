@@ -2,11 +2,12 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import photosRouter from './routes/photos'
+import authRouter from './routes/auth'
+import { authMiddleware } from './middleware/auth'
 
 const app = express()
 const PORT = process.env.PORT || 3001
 
-// ── 中间件 ──────────────────────────────────────────
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   credentials: true,
@@ -15,9 +16,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // ── 路由 ────────────────────────────────────────────
-app.use('/api/photos', photosRouter)
+app.use('/api/auth', authRouter)                         // 公开：登录/注册
+app.use('/api/photos', authMiddleware, photosRouter)     // 🔒 需要登录
 
-// 健康检查
+// ── 健康检查 ─────────────────────────────────────────
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() })
 })
