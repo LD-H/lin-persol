@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || '',
+})
+
 interface Photo {
   id: number
   name: string
@@ -19,7 +23,7 @@ export default function Gallery() {
   const fetchPhotos = async () => {
     setLoading(true)
     try {
-      const { data } = await axios.get('/api/photos')
+      const { data } = await api.get('/api/photos')
       setPhotos(data.photos || [])
     } catch {
       setError('获取图片失败，请检查后端服务是否启动')
@@ -38,7 +42,7 @@ export default function Gallery() {
     setUploading(true)
     setError('')
     try {
-      await axios.post('/api/photos/upload', formData, {
+      await api.post('/api/photos/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       await fetchPhotos()
@@ -53,7 +57,7 @@ export default function Gallery() {
   const handleDelete = async (id: number) => {
     if (!confirm('确认删除这张图片吗？')) return
     try {
-      await axios.delete(`/api/photos/${id}`)
+      await api.delete(`/api/photos/${id}`)
       setPhotos(prev => prev.filter(p => p.id !== id))
     } catch {
       setError('删除失败')
@@ -142,7 +146,6 @@ export default function Gallery() {
                   alt={photo.name}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                {/* hover 遮罩 */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex flex-col justify-end p-3 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
                   <p className="text-white text-xs truncate mb-1.5">{photo.name}</p>
                   <button
