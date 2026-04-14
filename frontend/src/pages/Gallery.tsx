@@ -1,8 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import { useAuth } from '../contexts/AuthContext'
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '',
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || '' })
+
+// 自动在每个请求带上 token
+api.interceptors.request.use(config => {
+  const token = localStorage.getItem('token')
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
 })
 
 interface Photo {
