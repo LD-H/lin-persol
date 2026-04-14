@@ -44,7 +44,7 @@ export default function About() {
           <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mb-4">About</p>
           <h1 className="text-4xl font-bold tracking-tight text-white mb-3">关于我</h1>
           <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
-            一名有 4 年以上经验的前端开发工程师，先后在京东、网易游戏参与大型 Web 项目开发。
+            一名有 5 年以上经验的前端开发工程师，先后在京东、网易游戏参与大型 Web 项目开发。
             热衷于用代码解决真实问题，对 AI 工具与现代工程化有浓厚兴趣。
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function About() {
             {[
               { dt: '姓名', dd: 'Lin' },
               { dt: '方向', dd: '前端开发 / 全栈探索' },
-              { dt: '经验', dd: '4 年以上' },
+              { dt: '经验', dd: '5 年以上' },
               { dt: '爱好', dd: '编程、摄影、阅读' },
             ].map(({ dt, dd }) => (
               <div key={dt} className="flex gap-6 text-sm">
