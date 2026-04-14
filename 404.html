@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lin's Space</title>
+    <script>
+      // 还原 404.html 重定向过来的路径
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('p');
+        if (p) {
+          var q = params.get('q');
+          params.delete('p');
+          params.delete('q');
+          var rest = params.toString();
+          window.history.replaceState(
+            null, null,
+            window.location.pathname + p +
+            (q ? '?' + q : '') +
+            (rest ? (q ? '&' : '?') + rest : '') +
+            window.location.hash
+          );
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
