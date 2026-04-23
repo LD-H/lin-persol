@@ -105,7 +105,7 @@ const experiences = [
   {
     company: '网易游戏（网易互娱）',
     title: '前端开发工程师',
-    period: '2023年4月 - 至今',
+    period: '2023年4月 - 2026.04',
     products: '游戏客服系统 · 绩效系统 · 风控系统 · 赛事H5 · 图灵-SOP系统',
     tech: ['React', 'TypeScript', 'Umi.js', 'Vite', 'Modern.js'],
     items: [

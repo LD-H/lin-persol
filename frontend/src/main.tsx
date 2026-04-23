@@ -9,5 +9,5 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter basename='/lin-persol'>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )
